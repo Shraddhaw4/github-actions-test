@@ -5,6 +5,11 @@ on:
     branches:
       - master
   workflow_dispatch: # Allows manual triggering of the apply step
+    inputs:
+      approve:
+        description: 'Approve the Terraform apply? (yes/no)'
+        required: true
+        default: 'no'
 
 jobs:
   plan:

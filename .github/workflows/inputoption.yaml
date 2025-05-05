@@ -15,6 +15,8 @@ on:
           - dev
           - sbx
           - prod
+          - a
+          - b 
 
 jobs:
   print-env:
@@ -24,16 +26,34 @@ jobs:
         run: |
           ENV="${{ inputs.environment }}"
           echo "Environment selected: $ENV"
-
-      - name: Conditionally run based on environment
+      - name: Set Name
         run: |
-          if [ "${{ inputs.environment}}" == "dev" ] || [ "${{ inputs.environment}}" == "sbx" ]; then
+          if [ "${{ inputs.environment}}" == "dev" ]; then
             echo "name=${{ env.ACC_1 }}" >> $GITHUB_ENV
-            echo "add=tesr" >> $GITHUB_ENV
-          else
+            echo "ENV=dev" >> $GITHUB_ENV
+          elif [ "${{ inputs.environment}}" == "sbx" ]; then
+            echo "name=${{ env.ACC_2 }}" >> $GITHUB_ENV
+            echo "ENV=sbx" >> $GITHUB_ENV
+          elif [ "${{ inputs.environment}}" == "prd" ]; then
             echo "name=${{ env.ACC_3 }}" >> $GITHUB_ENV
+            echo "ENV=prd" >> $GITHUB_ENV
+          else
+            echo "name=${{ env.ACC_2 }}" >> $GITHUB_ENV
+            echo "ENV=dev" >> $GITHUB_ENV
           fi
       - name: Display Name
         run: |
           echo ${{ env.name }}
+          echo ${{ env.ENV }}
+      - name: Conditionally run based on environment
+        run: |
+          if [ "${{ inputs.environment}}" == "dev" ] || [ "${{ inputs.environment}}" == "sbx" ]; then
+            echo "add=DevOrSbx" >> $GITHUB_ENV
+          elif [ "${{ inputs.environment}}" == "prd" ]; then
+            echo "add=Prd" >> $GITHUB_ENV
+          else
+            echo "add=None" >> $GITHUB_ENV
+          fi
+      - name: Display Add
+        run: |
           echo ${{ env.add }}

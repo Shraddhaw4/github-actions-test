@@ -36,3 +36,4 @@ jobs:
       - name: Display Name
         run: |
           echo ${{ env.name }}
+          echo ${{ env.add }}

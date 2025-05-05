@@ -1,5 +1,8 @@
 name: Input Options
-
+env:
+  ACC_1: "1234"
+  ACC_2: "5678"
+  ACC_3: "9012"
 on:
   workflow_dispatch:
     inputs:
@@ -23,5 +26,12 @@ jobs:
           echo "Environment selected: $ENV"
 
       - name: Conditionally run based on environment
-        if: ${{ inputs.environment == 'prod' }}
-        run: echo "🚀 Deploying to production..."
+        run: |
+          if [ "${{ inputs.environment}}" == "dev" ]; then
+            echo "name=${{ env.ACC_1 }}" >> $GITHUB_ENV
+          else
+            echo "name=${{ env.ACC_3 }}" >> $GITHUB_ENV
+          fi
+      - name: Display Name
+        run: |
+          echo ${{ env.name }}

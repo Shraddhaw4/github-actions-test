@@ -29,6 +29,7 @@ jobs:
         run: |
           if [ "${{ inputs.environment}}" == "dev" ] || [ "${{ inputs.environment}}" == "sbx" ]; then
             echo "name=${{ env.ACC_1 }}" >> $GITHUB_ENV
+            echo "add=tesr" >> $GITHUB_ENV
           else
             echo "name=${{ env.ACC_3 }}" >> $GITHUB_ENV
           fi

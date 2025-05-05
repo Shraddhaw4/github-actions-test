@@ -27,7 +27,7 @@ jobs:
 
       - name: Conditionally run based on environment
         run: |
-          if [ "${{ inputs.environment}}" == "dev" || "${{ inputs.environment}}" == "sbx" ]; then
+          if [ "${{ inputs.environment}}" == "dev" ] || [ "${{ inputs.environment}}" == "sbx" ]; then
             echo "name=${{ env.ACC_1 }}" >> $GITHUB_ENV
           else
             echo "name=${{ env.ACC_3 }}" >> $GITHUB_ENV

@@ -1,0 +1,27 @@
+name: Input Options
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Select environment'
+        required: true
+        default: 'dev'
+        type: choice
+        options:
+          - dev
+          - sbx
+          - prod
+
+jobs:
+  print-env:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show selected environment
+        run: |
+          ENV="${{ inputs.environment }}"
+          echo "Environment selected: $ENV"
+
+      - name: Conditionally run based on environment
+        if: ${{ inputs.environment == 'prod' }}
+        run: echo "🚀 Deploying to production..."

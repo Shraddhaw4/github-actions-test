@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       envname: ${{ steps.set-env.outputs.envname }}
-      add: ${{ steps.set-add.outputs.add }}
+      # add: ${{ steps.set-add.outputs.add }}
     steps:
       - name: Show selected account
         run: |

@@ -69,4 +69,4 @@ jobs:
       - name: Display Add
         run: |
           echo ${{ env.add }}
-          echo s3://${{ env.add }}-${{ env.ENV }}
+          echo s3://${{ env.add }}-${{ env.ENV }}/dags/

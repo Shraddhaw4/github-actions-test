@@ -66,6 +66,11 @@ jobs:
           else
             echo "add=None" >> $GITHUB_ENV
           fi
+  deploy:
+    name: deployment
+    needs: [print-env]
+    runs-on: ubuntu-latest
+    steps:
       - name: Display Add
         shell: bash
         run: |

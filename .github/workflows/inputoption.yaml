@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       envname: ${{ steps.set-env.outputs.envname }}
-      # add: ${{ steps.set-add.outputs.add }}
+      add: ${{ steps.set-add.outputs.Add }}
     steps:
       - name: Show selected account
         run: |
@@ -71,12 +71,18 @@ jobs:
           else
             echo "add=None" >> $GITHUB_ENV
           fi
+      - name: Display Add
+        id: set-add
+        run: |
+          echo ${{ env.add }}
+          echo "Add=${{ env.add }}" >> $GITHUB_OUTPUT
   deploy:
     name: deployment
     needs: [print-env]
     runs-on: ubuntu-latest
     env:
       ENV: ${{ needs.print-env.outputs.envname }}
+      add: ${{ needs.print-env.outputs.Add }}
     steps:
       - name: Display Add
         shell: bash

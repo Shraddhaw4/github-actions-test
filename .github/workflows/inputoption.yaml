@@ -22,7 +22,7 @@ on:
         options:
           - dev
           - sbx
-          - prod
+          - prd
           - a
           - b 
 

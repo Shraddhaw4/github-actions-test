@@ -60,12 +60,13 @@ jobs:
       - name: Conditionally run based on environment
         run: |
           if [ "${{ inputs.environment}}" == "dev" ] || [ "${{ inputs.environment}}" == "sbx" ]; then
-            echo "add=DevOrSbx" >> $GITHUB_ENV
+            echo "add=s3DevOrSbx" >> $GITHUB_ENV
           elif [ "${{ inputs.environment}}" == "prd" ]; then
-            echo "add=Prd" >> $GITHUB_ENV
+            echo "add=s3Prd" >> $GITHUB_ENV
           else
             echo "add=None" >> $GITHUB_ENV
           fi
       - name: Display Add
         run: |
           echo ${{ env.add }}
+          echo s3://${{ env.add }}-${{ env.ENV }}

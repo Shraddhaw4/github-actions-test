@@ -29,6 +29,9 @@ on:
 jobs:
   print-env:
     runs-on: ubuntu-latest
+    outputs:
+      envname: ${{ steps.set-env.outputs.envname }}
+      add: ${{ steps.set-add.outputs.add }}
     steps:
       - name: Show selected account
         run: |
@@ -54,8 +57,10 @@ jobs:
             echo "ENV=dev" >> $GITHUB_ENV
           fi
       - name: Display Name
+        id: set-env
         run: |
           echo ${{ env.name }}
+          echo ${{ env.ENV }}
           echo "envname=${{ env.ENV }}" >> $GITHUB_OUTPUT
       - name: Conditionally run based on environment
         run: |

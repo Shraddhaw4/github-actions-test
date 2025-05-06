@@ -67,6 +67,7 @@ jobs:
             echo "add=None" >> $GITHUB_ENV
           fi
       - name: Display Add
+        shell: bash
         run: |
           echo ${{ env.add }}
           echo s3://${{ env.add }}-${{ env.ENV }}/dags/

@@ -56,7 +56,7 @@ jobs:
       - name: Display Name
         run: |
           echo ${{ env.name }}
-          echo ${{ env.ENV }}
+          echo ${{ env.ENV }} >> $GITHUB_OUTPUT
       - name: Conditionally run based on environment
         run: |
           if [ "${{ inputs.environment}}" == "dev" ] || [ "${{ inputs.environment}}" == "sbx" ]; then
@@ -70,6 +70,8 @@ jobs:
     name: deployment
     needs: [print-env]
     runs-on: ubuntu-latest
+    env:
+      ENV: ${{ needs.print-env.outputs.ENV }}
     steps:
       - name: Display Add
         shell: bash

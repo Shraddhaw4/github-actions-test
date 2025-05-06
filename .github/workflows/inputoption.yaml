@@ -32,11 +32,11 @@ jobs:
     steps:
       - name: Show selected account
         run: |
-          ACC="${{ inputs.environment }}"
+          ACC="${{ inputs.account }}"
           echo "Account selected: $ACC"
       - name: Show selected environment
         run: |
-          ENV="${{ inputs.account }}"
+          ENV="${{ inputs.environment }}"
           echo "Environment selected: $ENV"
       - name: Set Name
         run: |

@@ -15,8 +15,11 @@ jobs:
     steps:
       - name: Call Lambda Function using Function URL
         run: |
-          JSON_PAYLOAD=$(printf '{"name": "%s"}' "${{ github.event.inputs.name }}")
+          NAME_INPUT="${{ github.event.inputs.name }}"
+          JSON_PAYLOAD="{\"name\": \"$NAME_INPUT\"}"
+
+          echo "Sending payload: $JSON_PAYLOAD"
 
           curl -X POST ${{ secrets.LAMBDA_FUNCTION_URL }} \
             -H "Content-Type: application/json" \
-            -d "$JSON_PAYLOAD"'
+            -d "$JSON_PAYLOAD"

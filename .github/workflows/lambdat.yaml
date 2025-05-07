@@ -2,11 +2,6 @@ name: Trigger Lambda Function
 
 on:
   workflow_dispatch:
-    inputs:
-      name:
-        description: 'Name to greet'
-        required: true
-        default: 'World'
 
 jobs:
   invoke-lambda:
@@ -24,14 +19,8 @@ jobs:
       # Step 2: Invoke Lambda Function using AWS CLI
       - name: Invoke Lambda Function
         run: |
-          NAME_INPUT="${{ github.event.inputs.name }}"
-          PAYLOAD="{\"name\": \"$NAME_INPUT\"}"
-
-          echo "Invoking Lambda with payload: $PAYLOAD"
-          
           aws lambda invoke \
             --function-name test-funct1 \
-            --payload "$PAYLOAD" \
             output.json
 
           # Output the response from Lambda function

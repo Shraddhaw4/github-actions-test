@@ -24,10 +24,14 @@ jobs:
       # Step 2: Invoke Lambda Function using AWS CLI
       - name: Invoke Lambda Function
         run: |
+          NAME_INPUT="${{ inputs.name }}"
+          PAYLOAD="{\"name\": \"$NAME_INPUT\"}"
+
+          echo "Invoking Lambda with payload: $PAYLOAD"
           aws lambda invoke \
             --function-name test-funct1 \
             --cli-binary-format raw-in-base64-out \
-            --payload '{ "name": {{ inputs.name }} }' \
+            --payload "$PAYLOAD" \
             output.json
 
           # Output the response from Lambda function

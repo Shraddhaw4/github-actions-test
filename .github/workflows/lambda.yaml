@@ -17,4 +17,4 @@ jobs:
         run: |
           curl -X POST ${{ secrets.LAMBDA_FUNCTION_URL }} \
             -H "Content-Type: application/json" \
-            -d '{"name": "${{ github.event.inputs.name }}"}'
+            -d '{"name": "${{ inputs.name }}"}'

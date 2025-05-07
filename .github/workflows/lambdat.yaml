@@ -2,6 +2,11 @@ name: Trigger Lambda Function
 
 on:
   workflow_dispatch:
+    inputs:
+      name:
+        description: "Enter name"
+        required: true
+        default: "Alice"
 
 jobs:
   invoke-lambda:
@@ -22,7 +27,7 @@ jobs:
           aws lambda invoke \
             --function-name test-funct1 \
             --cli-binary-format raw-in-base64-out \
-            --payload '{ "name": "Bob" }' \
+            --payload '{ "name": {{ inputs.name }} }' \
             output.json
 
           # Output the response from Lambda function

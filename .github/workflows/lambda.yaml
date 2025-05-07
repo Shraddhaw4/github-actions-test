@@ -21,5 +21,5 @@ jobs:
           echo "Sending payload: $JSON_PAYLOAD"
 
           curl -X POST ${{ secrets.LAMBDA_FUNCTION_URL }} \
-            -H "Content-Type: application/json" \
-            -d "$JSON_PAYLOAD"
+            -H 'content-type: application/json' \
+            -d '{ "name": "test" }'

@@ -21,6 +21,7 @@ jobs:
         run: |
           aws lambda invoke \
             --function-name test-funct1 \
+            --payload '{ "name": "Alice" }'
             output.json
 
           # Output the response from Lambda function

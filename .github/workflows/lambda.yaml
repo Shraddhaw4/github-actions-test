@@ -1,7 +1,12 @@
-name: Invoke Lambda Function
+name: Invoke Lambda with Variable
 
 on:
   workflow_dispatch:
+    inputs:
+      name:
+        description: 'Name to greet'
+        required: true
+        default: 'World'
 
 jobs:
   call-lambda:
@@ -10,4 +15,6 @@ jobs:
     steps:
       - name: Call Lambda Function using Function URL
         run: |
-          curl -X POST ${{ secrets.LAMBDA_FUNCTION_URL }}
+          curl -X POST ${{ secrets.LAMBDA_FUNCTION_URL }} \
+            -H "Content-Type: application/json" \
+            -d '{"name": "${{ github.event.inputs.name }}"}'

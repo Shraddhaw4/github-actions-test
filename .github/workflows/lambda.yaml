@@ -1,0 +1,13 @@
+name: Invoke Lambda Function
+
+on:
+  workflow_dispatch:
+
+jobs:
+  call-lambda:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Call Lambda Function using Function URL
+        run: |
+          curl -X POST ${{ secrets.LAMBDA_FUNCTION_URL }}

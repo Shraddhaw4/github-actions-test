@@ -28,6 +28,9 @@ jobs:
           PAYLOAD="{\"name\": \"$NAME_INPUT\"}"
 
           echo "Invoking Lambda with payload: $PAYLOAD"
+
+          aws lambda get-function --function-name test-funct1
+          
           aws lambda invoke \
             --function-name test-funct1 \
             --cli-binary-format raw-in-base64-out \

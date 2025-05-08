@@ -31,11 +31,11 @@ jobs:
 
           aws lambda get-function --function-name test-funct1
           
-          aws lambda invoke \
-            --function-name test-funct1 \
-            --cli-binary-format raw-in-base64-out \
-            --payload "$PAYLOAD" \
-            output.json
+          # aws lambda invoke \
+          #   --function-name test-funct1 \
+          #   --cli-binary-format raw-in-base64-out \
+          #   --payload "$PAYLOAD" \
+          #   output.json
 
-          # Output the response from Lambda function
-          cat output.json
+          # # Output the response from Lambda function
+          # cat output.json
